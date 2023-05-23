@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,6 +43,7 @@ class _SearchBarState extends State<SearchBar> {
                 icon: Icon(Icons.clear),
                 onPressed: () {
                   searchController.clear();
+                  _clearSearch();
                 }
             ),
             labelText: '搜索',
@@ -48,5 +52,20 @@ class _SearchBarState extends State<SearchBar> {
       ),
     );
   }
+
+    Future<void> _clearSearch() async {
+
+    Process.run("");
+
+    print('清空内容数据和信息');
+    MethodChannel channel = MethodChannel('samples.flutter.io/say_hello');
+    //
+    String greeting = await channel.invokeMethod('say_hello', {'name': 'Flutter'});
+    print(greeting);
+// Prints '{"message": "Hello Flutter!"}'
+
+
+  }
+
 }
 
